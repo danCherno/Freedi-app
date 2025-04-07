@@ -13,7 +13,7 @@ import MassConsensusQuestion from '@/view/pages/massConsensus/massConsesusQuesti
 import RandomSuggestions from '@/view/pages/massConsensus/randomSuggestions/RandomSuggestions';
 import TopSuggestions from '@/view/pages/massConsensus/topSuggestions/TopSuggestions';
 import VotingSuggestions from '@/view/pages/massConsensus/votingSuggestions/VotingSuggestions';
-import LeaveFeedback from '@/view/pages/massConsensus/leaveFeedback/LeaveFeedback';
+import LeaveFeedback from '@/view/pages/massConsensus/thankYou/leaveFeedback/LeaveFeedback';
 
 // Protected routes
 import StatementMain from '@/view/pages/statement/StatementMain';

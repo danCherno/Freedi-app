@@ -11,7 +11,7 @@ interface MassConsensusMember {
 	creator: Creator;
 } //TODO: add to types
 
-export function useLeaveFeedback() {
+export function useLeaveFeedback(setState) {
 	const [email, setEmail] = useState('');
 	const [mailStatus, setMailStatus] = useState<string>("pending");
 	const { statementId } = useParams();
@@ -21,7 +21,8 @@ export function useLeaveFeedback() {
 	const handleSendButton = () => {
 		setMailStatus(emailRegex.test(email) ? "valid" : "invalid");
 		if (mailStatus !== "valid") return;
-
+		
+		setState("submited")
 		const massConsensusMember: MassConsensusMember = {
 			statementId: statementId,
 			lastUpdate: Date.now(),

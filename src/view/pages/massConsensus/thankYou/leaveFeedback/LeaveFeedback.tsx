@@ -1,20 +1,16 @@
-import { MassConsensusPageUrls } from 'delib-npm';
 import { MailIcon } from 'lucide-react';
-import TitleMassConsensus from '../TitleMassConsensus/TitleMassConsensus';
-import FooterMassConsensus from '../footerMassConsensus/FooterMassConsensus';
+import TitleMassConsensus from '../../TitleMassConsensus/TitleMassConsensus';
+import FooterMassConsensus from '../../footerMassConsensus/FooterMassConsensus';
 import styles from './LeaveFeedback.module.scss';
 import { useUserConfig } from '@/controllers/hooks/useUserConfig';
 import { useLeaveFeedback } from './LeaveFeedbackVM';
-import { useHeader } from '../headerMassConsensus/HeaderContext';
+import { useHeader } from '../../headerMassConsensus/HeaderContext';
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
 
-function LeaveFeedback() {
-	const { statementId } = useParams();
-	const navigate = useNavigate();
+function LeaveFeedback(setState) {
 	const { t } = useUserConfig();
 	const { handleSendButton, handleEmailChange, mailStatus } =
-		useLeaveFeedback();
+		useLeaveFeedback(setState);
 
 	const { setHeader } = useHeader();
 
@@ -26,13 +22,6 @@ function LeaveFeedback() {
 			setHeader,
 		});
 	}, []);
-
-	useEffect(() => {
-		if (mailStatus === 'valid')
-			navigate(
-				`/mass-consensus/${statementId}/${MassConsensusPageUrls.thankYou}`
-			);
-	}, [mailStatus]);
 
 	return (
 		<div>
@@ -64,7 +53,8 @@ function LeaveFeedback() {
 			<FooterMassConsensus
 				isNextActive={true}
 				onNext={handleSendButton}
-				isFeedback={true}
+				ifFeedback={() => setState("skipped")}
+				blockNavigation={true}
 			/>
 			<div style={{ textAlign: 'center', marginTop: '1rem' }}>
 				<a

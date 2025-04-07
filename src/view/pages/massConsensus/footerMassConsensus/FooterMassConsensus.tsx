@@ -8,13 +8,13 @@ import { useState } from 'react';
 const FooterMassConsensus = ({
 	isIntro,
 	isNextActive,
-	isFeedback,
+	ifFeedback,
 	onNext,
 	blockNavigation
 }: {
 	isIntro?: boolean;
 	isNextActive?: boolean;
-	isFeedback?: boolean;
+	ifFeedback?: () => void;
 	onNext?: () => void;
 	blockNavigation?: boolean;
 }) => {
@@ -46,19 +46,19 @@ const FooterMassConsensus = ({
 					onClick={() => handleClick()}
 					disabled={isButtonClicked}
 				>
-					{isFeedback ? t('Send') : t('Start')}
+					{t('Start')}
 				</button>
 			);
 		}
 
-		if (isFeedback) {
+		if (ifFeedback) {
 			return (
 				<>
 
 					<button
 						className='btn btn--massConsensus btn--secondary'
 						disabled={isButtonClicked}
-						onClick={() => handleClick()}
+						onClick={() => handleClick(ifFeedback)}
 					>
 						{t('Skip')}
 					</button>
