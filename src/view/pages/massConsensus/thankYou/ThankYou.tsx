@@ -10,7 +10,7 @@ const ThankYou = () => {
 
     return (
         <>
-            { (state === "feedback")? <LeaveFeedback setstate={setState}/> :
+            { (state === "feedback")? <LeaveFeedback setState={setState}/> :
             <div className={styles.thanks}>
                 <img src={Dove} alt="a dove that says thanks" />
                 {(state === "submited")? 

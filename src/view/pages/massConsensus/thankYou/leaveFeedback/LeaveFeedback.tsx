@@ -5,9 +5,13 @@ import styles from './LeaveFeedback.module.scss';
 import { useUserConfig } from '@/controllers/hooks/useUserConfig';
 import { useLeaveFeedback } from './LeaveFeedbackVM';
 import { useHeader } from '../../headerMassConsensus/HeaderContext';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 
-function LeaveFeedback(setState) {
+interface Props {
+	setState: React.Dispatch<React.SetStateAction<"feedback" | "submited" | "skipped">>;
+}
+
+const LeaveFeedback: FC<Props> = ({ setState }) => {
 	const { t } = useUserConfig();
 	const { handleSendButton, handleEmailChange, mailStatus } =
 		useLeaveFeedback(setState);
@@ -53,7 +57,8 @@ function LeaveFeedback(setState) {
 			<FooterMassConsensus
 				isNextActive={true}
 				onNext={handleSendButton}
-				ifFeedback={() => setState("skipped")}
+				onSkip={() => setState("skipped")}
+				isFeedback={true}
 				blockNavigation={true}
 			/>
 			<div style={{ textAlign: 'center', marginTop: '1rem' }}>

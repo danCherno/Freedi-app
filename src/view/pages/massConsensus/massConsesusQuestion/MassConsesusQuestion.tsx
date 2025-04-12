@@ -3,9 +3,15 @@ import InitialQuestion from "./initialQuestion/InitialQuestion";
 import useMassConsensusQuestion from "./MassConsesusQuestionVM"
 import SimilarSuggestions from "./similarSuggestions/SimilarSuggestions";
 import FooterMassConsensus from '../footerMassConsensus/FooterMassConsensus';
+import { useNavigate, useParams } from 'react-router';
+import { getStepNavigation, useMassConsensusSteps } from '../MassConsensusVM';
 
 const MassConsensusQuestion = () => {
     const { stage, updateStage, handleNext, ifButtonEnabled, setIfButtonEnabled } = useMassConsensusQuestion();
+    const navigate = useNavigate();
+    const { statementId } = useParams<{ statementId: string }>();
+    const { steps, currentStep } = useMassConsensusSteps();
+    const { nextStep } = getStepNavigation(steps, currentStep);
     
     return (
         <>
@@ -19,6 +25,7 @@ const MassConsensusQuestion = () => {
 				onNext={handleNext}
 				isNextActive={ifButtonEnabled}
                 blockNavigation={true}
+                onSkip={() => navigate(`/mass-consensus/${statementId}/${nextStep}`)}
 			/>
         </>
     )

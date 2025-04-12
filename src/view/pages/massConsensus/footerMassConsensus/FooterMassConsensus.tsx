@@ -8,14 +8,16 @@ import { useState } from 'react';
 const FooterMassConsensus = ({
 	isIntro,
 	isNextActive,
-	ifFeedback,
+	isFeedback,
 	onNext,
+	onSkip,
 	blockNavigation
 }: {
 	isIntro?: boolean;
 	isNextActive?: boolean;
-	ifFeedback?: () => void;
+	isFeedback?: boolean;
 	onNext?: () => void;
+	onSkip?: () => void;
 	blockNavigation?: boolean;
 }) => {
 	const { statementId } = useParams<{ statementId: string }>();
@@ -34,10 +36,6 @@ const FooterMassConsensus = ({
 		}
 	};
 
-	// if (goTo === undefined) {
-	// 	return null;
-	// }
-
 	const renderButton = () => {
 		if (isIntro) {
 			return (
@@ -51,14 +49,14 @@ const FooterMassConsensus = ({
 			);
 		}
 
-		if (ifFeedback) {
+		if (isFeedback) {
 			return (
 				<>
 
 					<button
 						className='btn btn--massConsensus btn--secondary'
 						disabled={isButtonClicked}
-						onClick={() => handleClick(ifFeedback)}
+						onClick={() => handleClick(blockNavigation? onSkip: null)}
 					>
 						{t('Skip')}
 					</button>
@@ -79,7 +77,7 @@ const FooterMassConsensus = ({
 				<button
 					className='btn btn--massConsensus btn--secondary'
 					disabled={isButtonClicked}
-					onClick={() => handleClick()}
+					onClick={() => handleClick(blockNavigation? onSkip: null)}
 				>
 					{t('Skip')}
 				</button>

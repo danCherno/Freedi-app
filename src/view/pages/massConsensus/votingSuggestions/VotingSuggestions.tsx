@@ -64,6 +64,7 @@ const VotingSuggestions = () => {
 			<FooterMassConsensus
 				isNextActive={true}
 				onNext={navigateToFeedback}
+				blockNavigation={true}
 			/>
 		</>
 	);
