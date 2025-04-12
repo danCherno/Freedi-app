@@ -3,7 +3,7 @@ import styles from './FooterMassConsensus.module.scss';
 import { useUserConfig } from '@/controllers/hooks/useUserConfig';
 import { getStepNavigation, useMassConsensusSteps } from '../MassConsensusVM';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const FooterMassConsensus = ({
 	isIntro,
@@ -27,11 +27,15 @@ const FooterMassConsensus = ({
 	const { nextStep: goTo } = getStepNavigation(steps, currentStep);
 	const [isButtonClicked, setIsButtonClicked] = useState(false);
 
+	useEffect(() => {
+		setIsButtonClicked(false);
+	},[onNext])
+
 	const handleClick = (callback?: () => void) => {
-		if (!goTo) return;
 		if (callback) callback();
+		setIsButtonClicked(true);
 		if (!blockNavigation) {
-			setIsButtonClicked(true);
+			if (!goTo) return;
 			navigate(`/mass-consensus/${statementId}/${goTo}`)
 		}
 	};

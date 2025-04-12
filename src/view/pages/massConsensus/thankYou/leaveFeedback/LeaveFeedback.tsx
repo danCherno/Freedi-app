@@ -19,7 +19,7 @@ const LeaveFeedback: FC<Props> = ({ setState }) => {
 	const { setHeader } = useHeader();
 
 	useEffect(() => {
-		setHeader({
+		setHeader({	
 			title: t('Sign up'),
 			backToApp: false,
 			isIntro: false,
